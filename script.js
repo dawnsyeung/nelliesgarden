@@ -51,6 +51,7 @@ const checkoutBtn = document.getElementById('checkoutBtn');
 const contactForm = document.getElementById('contactForm');
 const formFeedback = document.getElementById('formFeedback');
 const yearEl = document.getElementById('year');
+const tabContainers = document.querySelectorAll('[data-tabs]');
 
 yearEl.textContent = new Date().getFullYear();
 
@@ -179,5 +180,33 @@ contactForm?.addEventListener('submit', (event) => {
   contactForm.reset();
 });
 
+function initTabs() {
+  if (!tabContainers.length) return;
+  tabContainers.forEach((container) => {
+    const tabs = Array.from(container.querySelectorAll('[data-tab]'));
+    const panels = Array.from(container.querySelectorAll('[data-panel]'));
+    if (!tabs.length || !panels.length) return;
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach((btn) => {
+          const isActive = btn === tab;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', String(isActive));
+          btn.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+
+        panels.forEach((panel) => {
+          const matches = panel.dataset.panel === target;
+          panel.classList.toggle('active', matches);
+          panel.hidden = !matches;
+        });
+      });
+    });
+  });
+}
+
 renderProducts();
 renderCart();
+initTabs();
