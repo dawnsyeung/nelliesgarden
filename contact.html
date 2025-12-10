@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Nellie's Garden Frass Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="brand">
+          <span class="logo">🌿</span>
+          <div>
+            <p class="brand-kicker">Nellie's Garden</p>
+            <p class="brand-name">Black Soldier Fly Frass</p>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="benefits.html">Benefits</a>
+          <a href="shop.html">Shop</a>
+          <a href="research.html">Research</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="cta-chip" href="shop.html">Shop Frass</a>
+      </header>
+
+      <main>
+        <section class="page-hero">
+          <p class="hero-eyebrow">Talk with the frass nerds</p>
+          <h1>We help consumers and pros dial in biology-forward fertility.</h1>
+          <p>
+            Based in Bastrop, Texas, our team supports gardeners, landscapers,
+            sports turf managers, and CEA operators with customized rates and
+            lab-backed data.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">Send a message</a>
+            <a class="btn ghost" href="shop.html">Order products</a>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <p class="eyebrow">Connect</p>
+            <h2>Quick ways to reach the team.</h2>
+            <p>Tell us about your crops, acreage, or upcoming installs.</p>
+          </div>
+          <div class="card-grid contact-info">
+            <article class="info-card">
+              <h3>Email</h3>
+              <p>
+                <a class="text-link" href="mailto:soil@nelliesgarden.com">soil@nelliesgarden.com</a>
+              </p>
+              <p>We answer within 1 business day.</p>
+            </article>
+            <article class="info-card">
+              <h3>Phone</h3>
+              <p><a class="text-link" href="tel:+15125551212">+1 (512) 555-1212</a></p>
+              <p>Weekdays 9a–5p CT for rush orders or logistics.</p>
+            </article>
+            <article class="info-card">
+              <h3>Warehouse & insectary</h3>
+              <p>415 River Timber Rd, Bastrop, TX 78602</p>
+              <p>Pickup by appointment; loading dock + forklift onsite.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="section contact">
+          <div class="section-header">
+            <p class="eyebrow">Contact</p>
+            <h2>Tell us about your soil goals.</h2>
+            <p>
+              We love dialing in frass programs for market gardeners, landscapers,
+              and home growers. Send a note and we'll respond quickly.
+            </p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <label>
+              Full name
+              <input type="text" name="name" placeholder="Nellie Grower" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@soil.co" required />
+            </label>
+            <label>
+              Growing focus
+              <select name="focus" required>
+                <option value="vegetables">Vegetables</option>
+                <option value="ornamental">Ornamental</option>
+                <option value="houseplants">Houseplants</option>
+                <option value="turf">Turf / Sports Fields</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="4" placeholder="Tell us about your beds or fields." required></textarea>
+            </label>
+            <button class="btn primary" type="submit">Send message</button>
+            <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="section provenance">
+          <div class="section-header">
+            <p class="eyebrow">Visit us</p>
+            <h2>Central Texas tours + training.</h2>
+            <p>
+              Schedule a walkthrough of the insect rearing room, dryer, and
+              screening line so you can show customers exactly how their inputs
+              are produced.
+            </p>
+          </div>
+          <div class="card-grid">
+            <article class="info-card">
+              <h3>Grower workshops</h3>
+              <p>Monthly Saturday sessions on compost teas, seed starting, and spraying SOPs.</p>
+            </article>
+            <article class="info-card">
+              <h3>Commercial QA visits</h3>
+              <p>Bring your QA or food safety team for documentation-friendly audits.</p>
+            </article>
+            <article class="info-card">
+              <h3>Virtual consultations</h3>
+              <p>Video calls with our agronomist cover soil tests, tissue data, and fertigation math.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="year"></span> Nellie's Garden Frass Co. All rights reserved.</p>
+        <p>Made with regenerative energy in Central Texas.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
