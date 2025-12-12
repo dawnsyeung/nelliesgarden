@@ -11,6 +11,11 @@
   font-size: 16px;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -142,11 +147,20 @@ a:hover {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.85rem 1.8rem;
   border-radius: 999px;
   font-weight: 600;
   border: none;
   cursor: pointer;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  appearance: none;
 }
 
 .btn.primary {
@@ -198,6 +212,15 @@ a:hover {
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+
+.hero-visual figure::before,
+.hero-visual figure::after {
+  content: none !important;
+}
+
+.hero-visual figure img:not(:first-of-type) {
+  display: none !important;
 }
 
 .hero-visual img {
@@ -654,5 +677,38 @@ textarea {
 
   .store {
     padding: 2rem 1.2rem;
+  }
+
+  .hero {
+    padding: 2.25rem 0;
+  }
+
+  .hero-visual img {
+    height: 280px;
+  }
+
+  .hero-visual figcaption {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-actions {
+    gap: 0.75rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
   }
 }
