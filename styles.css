@@ -74,6 +74,15 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
+}
+
+.brand-logo {
+  height: 52px;
+  width: auto;
+  max-width: min(240px, 44vw);
+  display: block;
+  object-fit: contain;
 }
 
 .brand-kicker {
@@ -668,6 +677,11 @@ textarea {
 @media (max-width: 768px) {
   .site-header {
     flex-wrap: wrap;
+  }
+
+  .brand-logo {
+    height: 44px;
+    max-width: min(220px, 68vw);
   }
 
   .site-nav {
