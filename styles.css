@@ -292,6 +292,24 @@ a:hover {
   margin: 0.5rem 0 0;
 }
 
+.data-footnote-marker {
+  font-size: 0.6em;
+  vertical-align: super;
+  margin-left: 0.15em;
+}
+
+.data-footnote {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.metrics .data-footnote {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
 .section {
   padding: 3rem 0;
 }
