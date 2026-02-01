@@ -207,6 +207,31 @@ function initTabs() {
   });
 }
 
+const frassStudyButtons = document.querySelectorAll('[data-protected-link]');
+const frassAccessKey = 'frassStudyAccess';
+const frassPassword = 'Frass';
+
+function requestFrassAccess() {
+  const entry = window.prompt('Enter the Frass Study password to continue.');
+  if (entry === null) return false;
+  if (entry.trim() === frassPassword) {
+    sessionStorage.setItem(frassAccessKey, 'true');
+    return true;
+  }
+  alert('Incorrect password. Please try again.');
+  return false;
+}
+
+frassStudyButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const target = button.dataset.protectedLink;
+    if (!target) return;
+    if (sessionStorage.getItem(frassAccessKey) === 'true' || requestFrassAccess()) {
+      window.location.href = target;
+    }
+  });
+});
+
 renderProducts();
 renderCart();
 initTabs();
