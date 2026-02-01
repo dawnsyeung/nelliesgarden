@@ -65,8 +65,8 @@ a:hover {
   padding: 1rem 0 2rem;
   position: sticky;
   top: 0;
-  background: rgba(6, 20, 12, 0.92);
-  backdrop-filter: blur(12px);
+  background: transparent;
+  backdrop-filter: none;
   z-index: 5;
 }
 
@@ -78,9 +78,9 @@ a:hover {
 }
 
 .brand-logo {
-  height: 52px;
+  height: 78px;
   width: auto;
-  max-width: min(240px, 44vw);
+  max-width: min(360px, 44vw);
   display: block;
   object-fit: contain;
 }
@@ -680,8 +680,8 @@ textarea {
   }
 
   .brand-logo {
-    height: 44px;
-    max-width: min(220px, 68vw);
+    height: 66px;
+    max-width: min(330px, 68vw);
   }
 
   .site-nav {
