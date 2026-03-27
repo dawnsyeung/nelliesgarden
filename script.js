@@ -52,8 +52,11 @@ const contactForm = document.getElementById('contactForm');
 const formFeedback = document.getElementById('formFeedback');
 const yearEl = document.getElementById('year');
 const tabContainers = document.querySelectorAll('[data-tabs]');
+const mobileMenuBreakpoint = window.matchMedia('(max-width: 900px)');
 
-yearEl.textContent = new Date().getFullYear();
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
 
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-US', {
@@ -207,6 +210,92 @@ function initTabs() {
   });
 }
 
+function initMobileNavigation() {
+  const header = document.querySelector('.site-header');
+  const nav = document.querySelector('.site-nav');
+  if (!(header instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
+  header.classList.add('js-nav');
+
+  const existingToggle = header.querySelector('.menu-toggle');
+  const toggle =
+    existingToggle instanceof HTMLButtonElement
+      ? existingToggle
+      : (() => {
+          const button = document.createElement('button');
+          button.className = 'menu-toggle';
+          button.type = 'button';
+          button.setAttribute('aria-label', 'Open navigation menu');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-controls', 'primary-navigation');
+          button.innerHTML = `
+            <span class="menu-toggle-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="sr-only">Menu</span>
+          `;
+          header.append(button);
+          return button;
+        })();
+
+  if (!nav.id) {
+    nav.id = 'primary-navigation';
+  }
+  toggle.setAttribute('aria-controls', nav.id);
+
+  if (!nav.querySelector('.mobile-nav-shop')) {
+    const shopHref = document.querySelector('.cta-chip')?.getAttribute('href') || 'shop.html';
+    const shopLink = document.createElement('a');
+    shopLink.className = 'mobile-nav-shop';
+    shopLink.href = shopHref;
+    shopLink.textContent = 'Shop Frass';
+    nav.append(shopLink);
+  }
+
+  function setExpanded(isOpen) {
+    header.classList.toggle('nav-open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  }
+
+  function closeMenu() {
+    setExpanded(false);
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = header.classList.contains('nav-open');
+    setExpanded(!isOpen);
+  });
+
+  nav.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (!target.closest('a')) return;
+    if (mobileMenuBreakpoint.matches) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  function syncMenuToViewport() {
+    if (!mobileMenuBreakpoint.matches) {
+      closeMenu();
+    }
+  }
+
+  if (mobileMenuBreakpoint.addEventListener) {
+    mobileMenuBreakpoint.addEventListener('change', syncMenuToViewport);
+  } else {
+    mobileMenuBreakpoint.addListener(syncMenuToViewport);
+  }
+}
+
 const frassStudyButtons = document.querySelectorAll('[data-protected-link]');
 const frassAccessKey = 'frassStudyAccess';
 const frassPassword = 'Frass';
@@ -235,3 +324,4 @@ frassStudyButtons.forEach((button) => {
 renderProducts();
 renderCart();
 initTabs();
+initMobileNavigation();
