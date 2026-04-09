@@ -214,7 +214,7 @@ function initMobileNavigation() {
   const header = document.querySelector('.site-header');
   const nav = document.querySelector('.site-nav');
   if (!(header instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
-  header.classList.add('js-nav');
+  header.classList.add('mobile-nav-ready');
 
   const existingToggle = header.querySelector('.menu-toggle');
   const toggle =
