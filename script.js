@@ -212,11 +212,13 @@ function initTabs() {
 
 function initMobileNavigation() {
   const header = document.querySelector('.site-header');
+  const headerInner = document.querySelector('.header-inner');
   const nav = document.querySelector('.site-nav');
   if (!(header instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
+  const container = headerInner instanceof HTMLElement ? headerInner : header;
   header.classList.add('mobile-nav-ready');
 
-  const existingToggle = header.querySelector('.menu-toggle');
+  const existingToggle = container.querySelector('.menu-toggle');
   const toggle =
     existingToggle instanceof HTMLButtonElement
       ? existingToggle
@@ -235,7 +237,7 @@ function initMobileNavigation() {
             </span>
             <span class="sr-only">Menu</span>
           `;
-          header.append(button);
+          container.append(button);
           return button;
         })();
 
