@@ -63,15 +63,32 @@ a:hover {
   padding: 0 clamp(1rem, 4vw, 3rem) 4rem;
 }
 
+.page-banner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: 1.75rem 0 1.25rem;
+}
+
 .page-logo {
   display: block;
-  padding: 2rem 0 1rem;
+  flex-shrink: 0;
 }
 
 .page-logo img {
   display: block;
   height: auto;
-  width: clamp(220px, 30vw, 360px);
+  width: clamp(88px, 12vw, 144px);
+}
+
+.page-tagline {
+  margin: 0;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 520px;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 .site-header {
@@ -109,6 +126,10 @@ a:hover {
   transition: color 0.15s ease;
   letter-spacing: 0.02em;
   font-weight: 500;
+}
+
+.site-nav a.nav-home {
+  font-weight: 700;
 }
 
 .site-nav a:hover {
@@ -954,12 +975,18 @@ textarea {
     flex-wrap: wrap;
   }
 
-  .page-logo {
-    padding: 1.5rem 0 0.75rem;
+  .page-banner {
+    gap: 1rem;
+    padding: 1.25rem 0 0.75rem;
   }
 
   .page-logo img {
-    width: clamp(180px, 50vw, 300px);
+    width: clamp(72px, 18vw, 120px);
+  }
+
+  .page-tagline {
+    font-size: 0.8rem;
+    padding-left: 1rem;
   }
 
   .header-inner {
