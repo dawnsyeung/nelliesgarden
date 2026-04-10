@@ -63,6 +63,17 @@ a:hover {
   padding: 0 clamp(1rem, 4vw, 3rem) 4rem;
 }
 
+.page-logo {
+  display: block;
+  padding: 2rem 0 1rem;
+}
+
+.page-logo img {
+  display: block;
+  height: auto;
+  width: clamp(220px, 30vw, 360px);
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -759,6 +770,14 @@ textarea {
 @media (max-width: 900px) {
   .site-shell {
     padding: 0 clamp(0.9rem, 4vw, 1.4rem) 2.8rem;
+  }
+
+  .page-logo {
+    padding: 1.5rem 0 0.75rem;
+  }
+
+  .page-logo img {
+    width: clamp(180px, 50vw, 300px);
   }
 
   .header-inner {
