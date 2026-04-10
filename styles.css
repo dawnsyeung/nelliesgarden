@@ -446,6 +446,24 @@ a:hover {
   margin-bottom: 0.4rem;
 }
 
+.highlight-box {
+  background: rgba(10, 31, 20, 0.7);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+}
+
+.highlight-box h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.highlight-box p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
 .use-case-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
