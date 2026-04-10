@@ -767,9 +767,191 @@ textarea {
   font-size: 0.8rem;
 }
 
-@media (max-width: 900px) {
-  .site-shell {
-    padding: 0 clamp(0.9rem, 4vw, 1.4rem) 2.8rem;
+/* Highlight box */
+.highlight-box {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: rgba(12, 35, 22, 0.8);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.highlight-icon {
+  font-size: 2rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.highlight-box h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.highlight-box p {
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+
+/* Takeaway section */
+.takeaway-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.takeaway-card {
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(141, 240, 140, 0.15);
+  text-align: center;
+}
+
+.takeaway-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.takeaway-card h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.takeaway-statement {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 780px;
+}
+
+.takeaway-statement strong {
+  color: var(--accent);
+}
+
+/* Comparison table */
+.comparison-table {
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.comparison-row:last-child {
+  border-bottom: none;
+}
+
+.comparison-row span {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: rgba(10, 24, 16, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.comparison-row span:last-child {
+  border-right: none;
+}
+
+.comparison-header {
+  background: rgba(12, 35, 22, 0.8);
+}
+
+.comparison-header span {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  color: var(--text);
+  background: rgba(12, 35, 22, 0.8);
+}
+
+.comparison-label {
+  font-weight: 600;
+  color: var(--text) !important;
+}
+
+.comparison-best {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+/* Claims grid */
+.claims-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.claim-card {
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.claim-card h3 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.claim-card p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.claim-badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.claim-badge.allowed {
+  background: rgba(141, 240, 140, 0.18);
+  color: var(--accent);
+}
+
+.claim-badge.caution {
+  background: rgba(240, 200, 80, 0.18);
+  color: #f0c850;
+}
+
+.claim-badge.avoid {
+  background: rgba(240, 100, 100, 0.18);
+  color: #f07070;
+}
+
+/* Frass love link section on homepage */
+.frass-love-link {
+  background: rgba(10, 30, 20, 0.6);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  border: 1px solid rgba(141, 240, 140, 0.12);
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    flex-wrap: wrap;
   }
 
   .page-logo {
@@ -902,25 +1084,44 @@ textarea {
     font-size: 0.95rem;
   }
 
-  .data-table {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .data-row {
-    min-width: 480px;
-  }
-
-  .cart-item {
+  .highlight-box {
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 1rem;
+    padding: 1.5rem;
   }
 
-  .cart-item > div:last-child {
+  .comparison-row {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-header span:not(:first-child) {
+    display: none;
+  }
+
+  .comparison-row:not(.comparison-header) span {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .comparison-row:not(.comparison-header) span::before {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+  }
+
+  .comparison-row:not(.comparison-header) span:nth-child(2)::before { content: "BSFL Frass"; }
+  .comparison-row:not(.comparison-header) span:nth-child(3)::before { content: "Compost"; }
+  .comparison-row:not(.comparison-header) span:nth-child(4)::before { content: "Biochar"; }
+  .comparison-row:not(.comparison-header) span:nth-child(5)::before { content: "Synthetic"; }
+
+  .takeaway-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .frass-love-link {
+    padding: 1.5rem;
   }
 }
 
