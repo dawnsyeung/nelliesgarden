@@ -988,6 +988,89 @@ textarea {
   margin: 1rem 0;
 }
 
+/* Nellie story page */
+.nellie-story {
+  padding-top: 2rem;
+}
+
+.nellie-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.nellie-letter-frame {
+  position: sticky;
+  top: 5rem;
+}
+
+.nellie-letter-figure {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: rgba(16, 37, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nellie-letter-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.nellie-letter-figure figcaption {
+  padding: 0.85rem 1.15rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.nellie-narrative h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  margin: 2.5rem 0 0.75rem;
+  color: var(--text);
+}
+
+.nellie-narrative h2:first-child {
+  margin-top: 0;
+}
+
+.nellie-narrative p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+
+.nellie-quote-block {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.nellie-quote-block blockquote {
+  margin: 0;
+  padding: 2rem 2.5rem;
+  background: rgba(12, 35, 22, 0.8);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nellie-quote-block blockquote p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .site-header {
     flex-wrap: wrap;
@@ -1166,6 +1249,25 @@ textarea {
   }
 
   .frass-love-link {
+    padding: 1.5rem;
+  }
+
+  .nellie-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .nellie-letter-frame {
+    position: static;
+  }
+
+  .nellie-letter-figure img {
+    max-height: 480px;
+    object-fit: contain;
+    background: rgba(10, 24, 16, 0.5);
+  }
+
+  .nellie-quote-block blockquote {
     padding: 1.5rem;
   }
 }
