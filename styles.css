@@ -29,6 +29,12 @@ body {
   line-height: 1.65;
 }
 
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -54,78 +60,138 @@ a:hover {
 .site-shell {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+  padding: 0 clamp(1rem, 4vw, 3rem) 4rem;
+}
+
+.page-logo {
+  display: block;
+  padding: 2rem 0 1rem;
+}
+
+.page-logo img {
+  display: block;
+  height: auto;
+  width: clamp(220px, 30vw, 360px);
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f5f0e8;
+  border-bottom: 1px solid #e0d9cd;
+}
+
+.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.7rem 0 1.4rem;
-  position: sticky;
-  top: 0;
-  background: rgba(6, 20, 12, 0.92);
-  backdrop-filter: none;
-  z-index: 5;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-width: 0;
-  transform: translateX(10%);
-}
-
-.brand-logo {
-  height: 74px;
-  width: auto;
-  max-width: min(360px, 44vw);
-  display: block;
-  object-fit: contain;
-}
-
-.brand-kicker {
-  font-size: 0.85rem;
-  margin: 0;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.brand-name {
-  margin: 0;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.logo {
-  font-size: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.45rem clamp(1rem, 4vw, 3rem);
 }
 
 .site-nav {
   display: flex;
-  gap: 1.2rem;
-  font-size: 0.95rem;
+  gap: 1.8rem;
+  font-size: 0.82rem;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.mobile-nav-shop {
+  display: none;
 }
 
 .site-nav a {
-  color: var(--muted);
+  color: #3d3528;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+  letter-spacing: 0.02em;
+  font-weight: 500;
 }
 
 .site-nav a:hover {
-  color: var(--accent);
+  color: #1a5c2e;
 }
 
 .cta-chip {
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.9rem;
   border-radius: 999px;
-  background: #244b2f;
-  color: var(--accent);
+  background: #2a5e38;
+  color: #fff;
   font-weight: 600;
-  border: 1px solid rgba(141, 240, 140, 0.4);
-  transform: translateX(-10%);
+  font-size: 0.78rem;
+  border: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.cta-chip:hover {
+  background: #1e4a2b;
+  color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #d4cdbf;
+  background: transparent;
+  color: #3d3528;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle:hover,
+.menu-toggle:active {
+  border-color: #a09580;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.menu-toggle-bars {
+  width: 18px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-toggle-bars span {
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.site-header.nav-open .menu-toggle-bars span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.site-header.nav-open .menu-toggle-bars span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.nav-open .menu-toggle-bars span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .hero {
@@ -591,6 +657,13 @@ a:hover {
   display: inline-block;
 }
 
+.info-card,
+.research-grid article,
+.tab-panel,
+.resource-list a {
+  overflow-wrap: anywhere;
+}
+
 .contact {
   padding-bottom: 4rem;
 }
@@ -645,7 +718,7 @@ textarea {
 .provenance {
   background: linear-gradient(180deg, rgba(9, 25, 15, 0.8), rgba(4, 10, 6, 0.9));
   border-radius: var(--radius);
-  padding-bottom: 3rem;
+  padding: 2.5rem 2.5rem 3rem;
 }
 
 .cta-panel {
@@ -881,16 +954,110 @@ textarea {
     flex-wrap: wrap;
   }
 
-  .brand-logo {
-    height: 46px;
-    max-width: min(330px, 68vw);
+  .page-logo {
+    padding: 1.5rem 0 0.75rem;
   }
 
-  .site-nav {
-    flex-wrap: wrap;
-    justify-content: center;
+  .page-logo img {
+    width: clamp(180px, 50vw, 300px);
   }
 
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .site-header.mobile-nav-ready .header-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0 0.75rem;
+  }
+
+  .site-header.mobile-nav-ready .menu-toggle {
+    display: inline-flex;
+    order: 1;
+  }
+
+  .site-header.mobile-nav-ready .site-nav {
+    order: 3;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid #e0d9cd;
+    background: #f5f0e8;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    display: flex;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease, margin 0.3s ease;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+  }
+
+  .site-header.mobile-nav-ready.nav-open .site-nav {
+    max-height: 400px;
+    opacity: 1;
+    padding: 0.35rem 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  .site-header.mobile-nav-ready .site-nav a {
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #3d3528;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .site-header.mobile-nav-ready .site-nav a:hover,
+  .site-header.mobile-nav-ready .site-nav a:active {
+    background: rgba(0, 0, 0, 0.05);
+    color: #1a5c2e;
+  }
+
+  .site-header.mobile-nav-ready .cta-chip {
+    order: 2;
+    justify-self: end;
+  }
+
+  .mobile-nav-shop {
+    display: none;
+  }
+
+  .hero {
+    gap: 1.8rem;
+  }
+
+  .page-hero,
+  .store,
+  .cta-panel,
+  .cart-panel,
+  .provenance {
+    padding: 1.35rem;
+  }
+
+  .card-grid,
+  .use-case-grid,
+  .research-grid,
+  .product-grid {
+    gap: 0.9rem;
+  }
+
+  .section {
+    padding: 2.2rem 0;
+  }
+}
+
+@media (max-width: 768px) {
   .store {
     padding: 2rem 1.2rem;
   }
