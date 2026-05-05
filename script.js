@@ -175,12 +175,55 @@ checkoutBtn?.addEventListener('click', () => {
   alert(`We'll send a secure invoice for ${totalItems} item(s).`);
 });
 
-contactForm?.addEventListener('submit', (event) => {
+contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (!(contactForm instanceof HTMLFormElement) || !(formFeedback instanceof HTMLElement)) return;
+
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton?.textContent || 'Send message';
   const formData = new FormData(contactForm);
-  const name = formData.get('name');
-  formFeedback.textContent = `Thanks, ${name}! We'll reach out shortly.`;
-  contactForm.reset();
+  const name = String(formData.get('name') || 'there').trim();
+  const endpoint = contactForm.action;
+
+  if (!endpoint.includes('formspree.io/f/') || endpoint.endsWith('/your-form-id')) {
+    formFeedback.textContent = 'Form is not configured yet. Add your real Formspree form ID in contact.html.';
+    formFeedback.style.color = '#f0c850';
+    return;
+  }
+
+  try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+    formFeedback.textContent = 'Sending your message...';
+    formFeedback.style.color = '';
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Formspree submission failed with status ${response.status}`);
+    }
+
+    formFeedback.textContent = `Thanks, ${name}! We'll reach out shortly.`;
+    formFeedback.style.color = '';
+    contactForm.reset();
+  } catch (error) {
+    formFeedback.textContent = "Sorry, we couldn't send that right now. Please email hello@nelliesgarden.com.";
+    formFeedback.style.color = '#f07070';
+    console.error(error);
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  }
 });
 
 function initTabs() {

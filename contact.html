@@ -84,7 +84,13 @@
               and home growers. Send a note and we'll respond quickly.
             </p>
           </div>
-          <form class="contact-form" id="contactForm">
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New contact request from nelliesgarden.com" />
             <label>
               Full name
               <input type="text" name="name" placeholder="Nellie Grower" required />
