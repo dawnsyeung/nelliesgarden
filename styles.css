@@ -664,6 +664,10 @@ a:hover {
   gap: 1.2rem;
 }
 
+.benefits-research-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .research-grid article {
   background: rgba(9, 28, 19, 0.85);
   padding: 1.5rem;
@@ -1180,6 +1184,10 @@ textarea {
     gap: 0.9rem;
   }
 
+  .benefits-research-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .section {
     padding: 2.2rem 0;
   }
@@ -1273,6 +1281,10 @@ textarea {
 }
 
 @media (max-width: 420px) {
+  .benefits-research-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
