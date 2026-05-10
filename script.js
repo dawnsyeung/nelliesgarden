@@ -89,18 +89,6 @@ function renderProducts() {
     .join('');
 }
 
-function addToCart(productId) {
-  const product = products.find((item) => item.id === productId);
-  if (!product) return;
-  const existing = cartState.find((item) => item.id === productId);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cartState.push({ ...product, quantity: 1 });
-  }
-  renderCart();
-}
-
 function removeFromCart(productId) {
   const index = cartState.findIndex((item) => item.id === productId);
   if (index >= 0) {
