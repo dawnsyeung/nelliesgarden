@@ -185,7 +185,7 @@ contactForm?.addEventListener('submit', async (event) => {
   const name = String(formData.get('name') || 'there').trim();
   const endpoint = contactForm.action;
 
-  if (!endpoint.includes('formspree.io/f/') || endpoint.endsWith('/your-form-id')) {
+  if (!endpoint.includes('formspree.io/f/xrejkpqr') || endpoint.endsWith('/your-form-id')) {
     formFeedback.textContent = 'Form is not configured yet. Add your real Formspree form ID in contact.html.';
     formFeedback.style.color = '#f0c850';
     return;
