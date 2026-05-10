@@ -53,6 +53,9 @@ const formFeedback = document.getElementById('formFeedback');
 const yearEl = document.getElementById('year');
 const tabContainers = document.querySelectorAll('[data-tabs]');
 const mobileMenuBreakpoint = window.matchMedia('(max-width: 900px)');
+const shopFrassUrl =
+  document.querySelector('.cta-chip')?.getAttribute('href') ||
+  'https://shop.app/m/nelliesgarden?dynamicFilterVAvailability=%7B%22available%22%3Atrue%7D&inStock=true&utm_source=shop_app&utm_medium=shop_app_share&utm_campaign=share_store&link_alias=0dRlIUb74DnxM&sortBy=MOST_SALES';
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -77,19 +80,13 @@ function renderProducts() {
           <p>${product.description}</p>
           <p class="price">${formatCurrency(product.price)}</p>
           <p class="muted">${product.pounds} lb bag</p>
-          <button class="btn primary" data-product="${product.id}">
-            Add to cart
-          </button>
+          <a class="btn primary" href="${shopFrassUrl}" target="_blank" rel="noreferrer">
+            Go to Shopify
+          </a>
         </article>
       `
     )
     .join('');
-
-  productGrid.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-product]');
-    if (!button) return;
-    addToCart(button.dataset.product);
-  });
 }
 
 function addToCart(productId) {
