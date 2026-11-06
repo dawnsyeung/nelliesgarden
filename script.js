@@ -41,23 +41,19 @@ const products = [
     pounds: 750,
     weightLabel: '~750 lb tote',
     tag: 'Wholesale',
+    shopifyUrl:
+      'https://whiteeaglenutrition.myshopify.com/products/frass-soil-amendment-landscape-tote-750-lbs',
     image:
       'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80',
   },
 ];
 
-const cartState = [];
-
 const productGrid = document.getElementById('productGrid');
-const cartList = document.getElementById('cartList');
-const cartSubtotal = document.getElementById('cartSubtotal');
-const cartPounds = document.getElementById('cartPounds');
-const checkoutBtn = document.getElementById('checkoutBtn');
 const contactForm = document.getElementById('contactForm');
 const formFeedback = document.getElementById('formFeedback');
 const yearEl = document.getElementById('year');
 const tabContainers = document.querySelectorAll('[data-tabs]');
-const mobileMenuBreakpoint = window.matchMedia('(max-width: 900px)');
+const mobileMenuBreakpoint = window.matchMedia('(max-width: 1100px)');
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -81,7 +77,7 @@ function productAction(product) {
   if (product.shopifyUrl) {
     return `<a class="btn primary" href="${product.shopifyUrl}" target="_blank" rel="noopener noreferrer">Buy on Shopify</a>`;
   }
-  return `<button class="btn primary" data-product="${product.id}">Add to cart</button>`;
+  return '';
 }
 
 function renderProducts() {
@@ -101,96 +97,7 @@ function renderProducts() {
       `
     )
     .join('');
-
-  productGrid.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-product]');
-    if (!button) return;
-    addToCart(button.dataset.product);
-  });
 }
-
-function addToCart(productId) {
-  const product = products.find((item) => item.id === productId);
-  if (!product || product.shopifyUrl || product.comingSoon) return;
-  const existing = cartState.find((item) => item.id === productId);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cartState.push({ ...product, quantity: 1 });
-  }
-  renderCart();
-}
-
-function removeFromCart(productId) {
-  const index = cartState.findIndex((item) => item.id === productId);
-  if (index >= 0) {
-    cartState.splice(index, 1);
-    renderCart();
-  }
-}
-
-function updateQuantity(productId, delta) {
-  const item = cartState.find((p) => p.id === productId);
-  if (!item) return;
-  item.quantity = Math.max(1, item.quantity + delta);
-  renderCart();
-}
-
-function renderCart() {
-  if (!cartList) return;
-  if (!cartState.length) {
-    cartList.innerHTML = '<li class="muted">Cart is empty. Add your first bag!</li>';
-    cartSubtotal.textContent = '$0.00';
-    cartPounds.textContent = '0 lb';
-    checkoutBtn.disabled = true;
-    return;
-  }
-
-  checkoutBtn.disabled = false;
-
-  cartList.innerHTML = cartState
-    .map(
-      (item) => `
-        <li class="cart-item">
-          <div>
-            <strong>${item.name}</strong>
-            <p>${formatProductWeight(item)}</p>
-            <div class="quantity-controls">
-              <button type="button" data-action="decrease" data-id="${item.id}">-</button>
-              <span>${item.quantity}</span>
-              <button type="button" data-action="increase" data-id="${item.id}">+</button>
-            </div>
-          </div>
-          <div>
-            <p>${formatCurrency(item.price * item.quantity)}</p>
-            <button type="button" class="remove" data-action="remove" data-id="${item.id}">Remove</button>
-          </div>
-        </li>
-      `
-    )
-    .join('');
-
-  const subtotal = cartState.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const pounds = cartState.reduce((sum, item) => sum + item.pounds * item.quantity, 0);
-  cartSubtotal.textContent = formatCurrency(subtotal);
-  cartPounds.textContent = `${pounds} lb`;
-}
-
-cartList?.addEventListener('click', (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) return;
-  const id = target.dataset.id;
-  const action = target.dataset.action;
-  if (!id || !action) return;
-  if (action === 'remove') removeFromCart(id);
-  if (action === 'increase') updateQuantity(id, 1);
-  if (action === 'decrease') updateQuantity(id, -1);
-});
-
-checkoutBtn?.addEventListener('click', () => {
-  const totalItems = cartState.reduce((sum, item) => sum + item.quantity, 0);
-  alert(`We'll send a secure invoice for ${totalItems} item(s).`);
-});
 
 contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -384,6 +291,5 @@ frassStudyButtons.forEach((button) => {
 });
 
 renderProducts();
-renderCart();
 initTabs();
 initMobileNavigation();
