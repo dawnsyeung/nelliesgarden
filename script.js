@@ -2,9 +2,9 @@ const products = [
   {
     id: 'starter',
     name: 'Starter Pack',
-    description: '5 lb bag ideal for raised beds, herbs, and container veg.',
-    price: 24,
-    pounds: 5,
+    description: '2 lb bag ideal for raised beds, herbs, and container veg.',
+    price: 18,
+    pounds: 2,
     tag: 'Best for beginners',
     shopifyUrl:
       'https://whiteeaglenutrition.myshopify.com/products/frass-soil-amendment-2lb-bag',
