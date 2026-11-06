@@ -290,6 +290,58 @@ frassStudyButtons.forEach((button) => {
   });
 });
 
+function initInfographicLightbox() {
+  const links = document.querySelectorAll('a[data-enlarge]');
+  if (!links.length || typeof HTMLDialogElement === 'undefined') return;
+
+  const dialog = document.createElement('dialog');
+  dialog.className = 'infographic-lightbox';
+  dialog.innerHTML = `
+    <form method="dialog" class="infographic-lightbox-bar">
+      <a class="infographic-lightbox-full" target="_blank" rel="noopener noreferrer">Open full size</a>
+      <button type="submit" class="infographic-lightbox-close">Close</button>
+    </form>
+    <img alt="" />
+  `;
+  document.body.append(dialog);
+
+  const image = dialog.querySelector('img');
+  const fullSize = dialog.querySelector('.infographic-lightbox-full');
+  const closeButton = dialog.querySelector('.infographic-lightbox-close');
+
+  links.forEach((link) => {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      const source = link.querySelector('img');
+      image.alt = source?.alt || '';
+      fullSize.href = link.href;
+      image.removeAttribute('width');
+      image.removeAttribute('height');
+      image.src = link.href;
+      dialog.showModal();
+      closeButton?.focus();
+    });
+  });
+
+  dialog.addEventListener('click', (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const inside =
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom;
+    if (!inside) dialog.close();
+  });
+
+  dialog.addEventListener('close', () => {
+    image.removeAttribute('src');
+    image.alt = '';
+  });
+}
+
 renderProducts();
 initTabs();
 initMobileNavigation();
+initInfographicLightbox();
