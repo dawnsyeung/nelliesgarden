@@ -13,11 +13,12 @@ const products = [
   },
   {
     id: 'grower',
-    name: 'Market Grower Blend',
+    name: 'Heavy Feeder Blend',
     description: '20 lb sack with extra calcium for heavy-feeding crops.',
     price: 69,
     pounds: 20,
     tag: 'Market gardens',
+    comingSoon: true,
     image:
       'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80',
   },
@@ -28,15 +29,17 @@ const products = [
     price: 52,
     pounds: 10,
     tag: 'Soil biology',
+    comingSoon: true,
     image:
       'https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 'bulk',
-    name: 'Landscape Tote (1000 lb)',
-    description: 'Delivered in a breathable tote with moisture monitoring.',
+    name: 'Landscape Tote (~750 lb)',
+    description: 'Approximately 750 lbs, delivered in a breathable tote with moisture monitoring.',
     price: 480,
-    pounds: 1000,
+    pounds: 750,
+    weightLabel: '~750 lb tote',
     tag: 'Wholesale',
     image:
       'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80',
@@ -67,7 +70,14 @@ function formatCurrency(value) {
   }).format(value);
 }
 
+function formatProductWeight(product) {
+  return product.weightLabel || `${product.pounds} lb bag`;
+}
+
 function productAction(product) {
+  if (product.comingSoon) {
+    return `<button class="btn coming-soon" type="button" disabled>Coming soon</button>`;
+  }
   if (product.shopifyUrl) {
     return `<a class="btn primary" href="${product.shopifyUrl}" target="_blank" rel="noopener noreferrer">Buy on Shopify</a>`;
   }
@@ -85,7 +95,7 @@ function renderProducts() {
           <h3>${product.name}</h3>
           <p>${product.description}</p>
           <p class="price">${formatCurrency(product.price)}</p>
-          <p class="muted">${product.pounds} lb bag</p>
+          <p class="muted">${formatProductWeight(product)}</p>
           ${productAction(product)}
         </article>
       `
@@ -101,7 +111,7 @@ function renderProducts() {
 
 function addToCart(productId) {
   const product = products.find((item) => item.id === productId);
-  if (!product || product.shopifyUrl) return;
+  if (!product || product.shopifyUrl || product.comingSoon) return;
   const existing = cartState.find((item) => item.id === productId);
   if (existing) {
     existing.quantity += 1;
@@ -144,7 +154,7 @@ function renderCart() {
         <li class="cart-item">
           <div>
             <strong>${item.name}</strong>
-            <p>${item.pounds} lb bag</p>
+            <p>${formatProductWeight(item)}</p>
             <div class="quantity-controls">
               <button type="button" data-action="decrease" data-id="${item.id}">-</button>
               <span>${item.quantity}</span>
