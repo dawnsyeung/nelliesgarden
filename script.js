@@ -1,11 +1,13 @@
 const products = [
   {
     id: 'starter',
-    name: 'Kitchen Garden Starter',
+    name: 'Starter Pack',
     description: '5 lb bag ideal for raised beds, herbs, and container veg.',
     price: 24,
     pounds: 5,
     tag: 'Best for beginners',
+    shopifyUrl:
+      'https://whiteeaglenutrition.myshopify.com/products/frass-soil-amendment-2lb-bag',
     image:
       'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80',
   },
@@ -65,6 +67,13 @@ function formatCurrency(value) {
   }).format(value);
 }
 
+function productAction(product) {
+  if (product.shopifyUrl) {
+    return `<a class="btn primary" href="${product.shopifyUrl}" target="_blank" rel="noopener noreferrer">Buy on Shopify</a>`;
+  }
+  return `<button class="btn primary" data-product="${product.id}">Add to cart</button>`;
+}
+
 function renderProducts() {
   if (!productGrid) return;
   productGrid.innerHTML = products
@@ -77,9 +86,7 @@ function renderProducts() {
           <p>${product.description}</p>
           <p class="price">${formatCurrency(product.price)}</p>
           <p class="muted">${product.pounds} lb bag</p>
-          <button class="btn primary" data-product="${product.id}">
-            Add to cart
-          </button>
+          ${productAction(product)}
         </article>
       `
     )
@@ -94,7 +101,7 @@ function renderProducts() {
 
 function addToCart(productId) {
   const product = products.find((item) => item.id === productId);
-  if (!product) return;
+  if (!product || product.shopifyUrl) return;
   const existing = cartState.find((item) => item.id === productId);
   if (existing) {
     existing.quantity += 1;
